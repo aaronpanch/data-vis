@@ -1,0 +1,10 @@
+{
+  "name": "data-vis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Data visualization playground",
+  "main": "index.js",
+  "repository": "https://github.com/aaronpanch/data-vis.git",
+  "author": "Aaron Panchal <aaron.panchal@gmail.com>",
+  "license": "MIT"
+}
