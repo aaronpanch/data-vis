@@ -13,6 +13,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@vx/group": "^0.0.183",
+    "@vx/hierarchy": "^0.0.183",
+    "@vx/mock-data": "^0.0.185",
+    "@vx/scale": "^0.0.182",
+    "d3-hierarchy": "^1.1.8",
     "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
