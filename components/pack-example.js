@@ -2,7 +2,7 @@ import { Zoom } from "@vx/zoom";
 import { Group } from "@vx/group";
 import { scaleQuantize } from "@vx/scale";
 import { exoplanets as data } from "@vx/mock-data";
-import { Spring } from "react-spring";
+import { Spring, animated } from "react-spring";
 
 const extent = (data, value = d => d) => [
   Math.min(...data.map(value)),
@@ -42,10 +42,10 @@ export default ({ width, height }) => {
       >
         {zoom => {
           return (
-            <Spring to={{ matrix: zoom.toString() }}>
+            <Spring native to={{ matrix: zoom.toString() }}>
               {({ matrix }) => {
                 return (
-                  <Group transform={matrix}>
+                  <animated.g className="vx-group" transform={matrix}>
                     {circles.map((circle, i) => {
                       return (
                         <circle
@@ -68,7 +68,7 @@ export default ({ width, height }) => {
                         />
                       );
                     })}
-                  </Group>
+                  </animated.g>
                 );
               }}
             </Spring>
