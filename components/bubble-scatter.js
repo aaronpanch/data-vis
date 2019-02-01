@@ -1,3 +1,4 @@
+import React from "react";
 import { Zoom } from "@vx/zoom";
 import { scaleLinear, scaleLog, scaleQuantize } from "@vx/scale";
 import { Spring, animated } from "react-spring";
@@ -45,32 +46,35 @@ export default ({ width, height, data, margin = 30 }) => {
       >
         {zoom => {
           return (
-            <Spring native to={{ matrix: zoom.toString() }}>
-              {({ matrix }) => {
-                return (
-                  <animated.g className="vx-group" transform={matrix}>
-                    {data.map((topic, i) => {
-                      return (
-                        <circle
-                          key={`cir-${i}`}
-                          r={rScale(topic.freq)}
-                          cx={xScale(topic.x)}
-                          cy={yScale(topic.y)}
-                          opacity="0.7"
-                          fill={colorScale(topic.freq)}
-                          onClick={event => {
-                            zoom.setTranslate({
-                              translateX: center.x - xScale(topic.x),
-                              translateY: center.y - yScale(topic.y)
-                            });
-                          }}
-                        />
-                      );
-                    })}
-                  </animated.g>
-                );
-              }}
-            </Spring>
+            <React.Fragment>
+              <rect width={width} height={height} fill="#fff" />
+              <Spring native to={{ matrix: zoom.toString() }}>
+                {({ matrix }) => {
+                  return (
+                    <animated.g className="vx-group" transform={matrix}>
+                      {data.map((topic, i) => {
+                        return (
+                          <circle
+                            key={`cir-${i}`}
+                            r={rScale(topic.freq)}
+                            cx={xScale(topic.x)}
+                            cy={yScale(topic.y)}
+                            opacity="0.7"
+                            fill={colorScale(topic.freq)}
+                            onClick={event => {
+                              zoom.setTranslate({
+                                translateX: center.x - xScale(topic.x),
+                                translateY: center.y - yScale(topic.y)
+                              });
+                            }}
+                          />
+                        );
+                      })}
+                    </animated.g>
+                  );
+                }}
+              </Spring>
+            </React.Fragment>
           );
         }}
       </Zoom>

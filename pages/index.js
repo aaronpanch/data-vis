@@ -20,7 +20,7 @@ export default class extends React.Component {
   setViewport() {
     this.setState({
       width: window.innerWidth,
-      height: window.innerHeight - 5
+      height: window.innerHeight
     });
   }
 
@@ -38,6 +38,8 @@ export default class extends React.Component {
         <style jsx global>{`
           body {
             margin: 0;
+            overflow: hidden;
+            height: 100vh;
           }
         `}</style>
         <BubbleScatter width={width} height={height} data={data.default} />
