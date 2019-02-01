@@ -28,6 +28,11 @@ export default ({ width, height, data, margin = 30 }) => {
     range: [10, 100]
   });
 
+  const center = {
+    x: width / 2,
+    y: height / 2
+  };
+
   return (
     <svg width={width} height={height}>
       <Zoom
@@ -54,11 +59,6 @@ export default ({ width, height, data, margin = 30 }) => {
                           opacity="0.7"
                           fill={colorScale(topic.freq)}
                           onClick={event => {
-                            const center = {
-                              x: width / 2,
-                              y: height / 2
-                            };
-
                             zoom.setTranslate({
                               translateX: center.x - xScale(topic.x),
                               translateY: center.y - yScale(topic.y)
