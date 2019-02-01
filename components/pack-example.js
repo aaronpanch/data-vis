@@ -1,8 +1,10 @@
+import { Zoom } from "@vx/zoom";
 import { Group } from "@vx/group";
 import { Pack } from "@vx/hierarchy";
 import { hierarchy } from "d3-hierarchy";
 import { scaleQuantize } from "@vx/scale";
 import { exoplanets as data } from "@vx/mock-data";
+import { Spring } from "react-spring";
 
 const extent = (data, value = d => d) => [
   Math.min(...data.map(value)),
@@ -40,24 +42,53 @@ export default ({
 
   return (
     <svg width={width} height={height}>
-      <rect width={width} height={height} rx={14} fill="#ffffff" />
-      <Pack root={data} size={[width * 2, height * 2]}>
+      <Pack root={data} size={[width, height]}>
         {pack => {
           const circles = pack.descendants().slice(2);
           return (
-            <Group top={-height - margin.bottom} left={-width / 2}>
-              {circles.map((circle, i) => {
+            <Zoom
+              width={width}
+              height={height}
+              scaleXMin={1 / 2}
+              scaleXMax={10}
+              scaleYMin={1 / 2}
+              scaleYMax={10}
+            >
+              {zoom => {
                 return (
-                  <circle
-                    key={`cir-${i}`}
-                    r={circle.r}
-                    cx={circle.x}
-                    cy={circle.y}
-                    fill={colorScale(circle.data.radius)}
-                  />
+                  <Spring to={{ matrix: zoom.toString() }}>
+                    {({ matrix }) => {
+                      return (
+                        <Group transform={matrix}>
+                          {circles.map((circle, i) => {
+                            return (
+                              <circle
+                                key={`cir-${i}`}
+                                r={circle.r}
+                                cx={circle.x}
+                                cy={circle.y}
+                                fill={colorScale(circle.data.radius)}
+                                onClick={event => {
+                                  const center = {
+                                    x: width / 2,
+                                    y: height / 2
+                                  };
+
+                                  zoom.setTranslate({
+                                    translateX: center.x - circle.x,
+                                    translateY: center.y - circle.y
+                                  });
+                                }}
+                              />
+                            );
+                          })}
+                        </Group>
+                      );
+                    }}
+                  </Spring>
                 );
-              })}
-            </Group>
+              }}
+            </Zoom>
           );
         }}
       </Pack>

@@ -3,6 +3,6 @@ import PackExample from "../components/pack-example";
 
 export default () => (
   <Layout>
-    <PackExample width={1000} height={1000} />
+    <PackExample width={1000} height={840} />
   </Layout>
 );

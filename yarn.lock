@@ -666,6 +666,13 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@babel/runtime@^7.0.0":
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
+  integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
+  dependencies:
+    regenerator-runtime "^0.12.0"
+
 "@babel/template@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.0.0.tgz#c2bc9870405959c89a9c814376a2ecb247838c80"
@@ -708,6 +715,25 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@observablehq/flare@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@observablehq/flare/-/flare-0.0.0.tgz#d9df047ccd449e233674f20bb2bec1f4505eaae3"
+  integrity sha512-JIfpkTwzGsBAIhPkKdjH1xX6wCa7Z/V1Szp0su0KbXSf2OTjPREP5Ax6+URbxdZ84WMv1/+1DFQKllTb8bABbA==
+
+"@vx/clip-path@^0.0.183":
+  version "0.0.183"
+  resolved "https://registry.yarnpkg.com/@vx/clip-path/-/clip-path-0.0.183.tgz#d56350a09e911bd499dcc15ffccff858e9eca61d"
+  integrity sha512-mb+oLMRbPT46k6fFmrF6O05cWwgnm+sB3jPXX6Rzbi16zy1i8nUimyBRa9KzxX4c64vvW2MpFkOVg11I0wwx3Q==
+  dependencies:
+    prop-types "^15.5.10"
+
+"@vx/event@0.0.182", "@vx/event@^0.0.182":
+  version "0.0.182"
+  resolved "https://registry.yarnpkg.com/@vx/event/-/event-0.0.182.tgz#b5b20a4e14fcd383511ef7a318ca0a10e6da8140"
+  integrity sha512-kEnBfcyuSep3QdlpQjMRE4jSCcEC1xIcnIFkDGuTWLutlUgIP//o5VbeHIW4xLcOhLe4BjuMuPgmUNZB5nL5Cw==
+  dependencies:
+    "@vx/point" "0.0.182"
+
 "@vx/group@0.0.183", "@vx/group@^0.0.183":
   version "0.0.183"
   resolved "https://registry.yarnpkg.com/@vx/group/-/group-0.0.183.tgz#15c8b14c5cadbe5f76c3ddcab8c5698cae24b443"
@@ -733,12 +759,25 @@
   dependencies:
     d3-random "^1.0.3"
 
+"@vx/point@0.0.182":
+  version "0.0.182"
+  resolved "https://registry.yarnpkg.com/@vx/point/-/point-0.0.182.tgz#72abfa6ae923cf9bad23d9dd51709b2f31d81bf8"
+  integrity sha512-ZWDFVL5+RQXDSY6a5DZDRAoTFUmz0nxqUJidIHP9kDN1MGwoX43yaG7Ss1iJxe5a7Np5XGB2sm3xvmgZvf4a6g==
+
 "@vx/scale@^0.0.182":
   version "0.0.182"
   resolved "https://registry.yarnpkg.com/@vx/scale/-/scale-0.0.182.tgz#22f4423c7188cc8be0b6dbfe9db3e1544d639a98"
   integrity sha512-QFNWElBUscZD40SZoBOJtzqNU9fS5RAZypvYYJE1mipcEMLXLa8MExpeu/VushAbkSBz2B3T6K9myBL0QYi2xQ==
   dependencies:
     d3-scale "^2.0.0"
+
+"@vx/zoom@^0.0.185":
+  version "0.0.185"
+  resolved "https://registry.yarnpkg.com/@vx/zoom/-/zoom-0.0.185.tgz#3a0cb2ab3653988052bc01aa13aa529029de01cb"
+  integrity sha512-vVHpMzTwCt5NV/XATn8FolxU8RJc86iy/i9+AumBBds+nw2mSW4Y+tVi+V/XeVyt9SLb/OTAmksjez6Pst2SaQ==
+  dependencies:
+    "@vx/event" "0.0.182"
+    prop-types "^15.6.2"
 
 "@webassemblyjs/ast@1.7.8":
   version "1.7.8"
@@ -3602,7 +3641,7 @@ prop-types-exact@1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@15.6.2, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@15.6.2, prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -3726,6 +3765,13 @@ react-error-overlay@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
   integrity sha512-FlsPxavEyMuR6TjVbSSywovXSEyOg6ZDj5+Z8nbsRl9EkOzAhEIcS+GLoQDC5fz/t9suhUXWmUrOBrgeUvrMxw==
+
+react-spring@^7.2.10:
+  version "7.2.10"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-7.2.10.tgz#eacbf429327bea058677c3a01af87b9c387f4aa6"
+  integrity sha512-bsbgQh1DzTqjwuD1tDZ7Nu04G5JhNNXdezkcJ5xXNboedN/MPe0K+X/MtypUxXBUCLYT0r5oKT3zj4STqVpnPA==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
 
 react@^16.7.0:
   version "16.7.0"
