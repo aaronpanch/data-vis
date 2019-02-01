@@ -1,7 +1,5 @@
 import { Zoom } from "@vx/zoom";
-import { Group } from "@vx/group";
-import { scaleQuantize } from "@vx/scale";
-import { exoplanets as data } from "@vx/mock-data";
+import { scaleLinear, scaleQuantize } from "@vx/scale";
 import { Spring, animated } from "react-spring";
 
 const extent = (data, value = d => d) => [
@@ -9,26 +7,26 @@ const extent = (data, value = d => d) => [
   Math.max(...data.map(value))
 ];
 
-const exoplanets = data.filter(d => d.distance === 0);
-const planets = data.filter(d => d.distance !== 0);
-const pack = { children: [{ children: planets }].concat(exoplanets) };
+export default ({ width, height, data }) => {
+  const colorScale = scaleQuantize({
+    domain: extent(data, d => d.freq),
+    range: ["#ffe108", "#ffc10e", "#fd6d6f", "#855af2", "#11d2f9", "#49f4e7"]
+  });
 
-const colorScale = scaleQuantize({
-  domain: extent(data, d => d.radius),
-  range: ["#ffe108", "#ffc10e", "#fd6d6f", "#855af2", "#11d2f9", "#49f4e7"]
-});
+  const xScale = scaleLinear({
+    domain: extent(data, d => d.x),
+    range: [0, width]
+  });
 
-export default ({ width, height }) => {
-  const circles = [
-    {
-      r: 50,
-      x: 300,
-      y: 300,
-      data: {
-        radius: 1000
-      }
-    }
-  ];
+  const yScale = scaleLinear({
+    domain: extent(data, d => d.y),
+    range: [0, height]
+  });
+
+  const rScale = scaleLinear({
+    domain: extent(data, d => d.freq),
+    range: [0, 100]
+  });
 
   return (
     <svg width={width} height={height}>
@@ -46,14 +44,14 @@ export default ({ width, height }) => {
               {({ matrix }) => {
                 return (
                   <animated.g className="vx-group" transform={matrix}>
-                    {circles.map((circle, i) => {
+                    {data.map((topic, i) => {
                       return (
                         <circle
                           key={`cir-${i}`}
-                          r={circle.r}
-                          cx={circle.x}
-                          cy={circle.y}
-                          fill={colorScale(circle.data.radius)}
+                          r={rScale(topic.freq)}
+                          cx={xScale(topic.x)}
+                          cy={yScale(topic.y)}
+                          fill={colorScale(topic.freq)}
                           onClick={event => {
                             const center = {
                               x: width / 2,
@@ -61,8 +59,8 @@ export default ({ width, height }) => {
                             };
 
                             zoom.setTranslate({
-                              translateX: center.x - circle.x,
-                              translateY: center.y - circle.y
+                              translateX: center.x - xScale(topic.x),
+                              translateY: center.y - yScale(topic.y)
                             });
                           }}
                         />
