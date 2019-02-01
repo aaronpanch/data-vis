@@ -34,6 +34,13 @@ export default ({ width, height, data, margin = 30 }) => {
     y: height / 2
   };
 
+  const centerOn = (zoom, { x, y }) => {
+    zoom.setTranslate({
+      translateX: center.x - x,
+      translateY: center.y - y
+    });
+  };
+
   return (
     <svg width={width} height={height}>
       <Zoom
@@ -47,7 +54,12 @@ export default ({ width, height, data, margin = 30 }) => {
         {zoom => {
           return (
             <React.Fragment>
-              <rect width={width} height={height} fill="#fff" />
+              <rect
+                width={width}
+                height={height}
+                fill="#fff"
+                onClick={() => centerOn(zoom, center)}
+              />
               <Spring native to={{ matrix: zoom.toString() }}>
                 {({ matrix }) => {
                   return (
@@ -62,9 +74,9 @@ export default ({ width, height, data, margin = 30 }) => {
                             opacity="0.7"
                             fill={colorScale(topic.freq)}
                             onClick={event => {
-                              zoom.setTranslate({
-                                translateX: center.x - xScale(topic.x),
-                                translateY: center.y - yScale(topic.y)
+                              centerOn(zoom, {
+                                x: xScale(topic.x),
+                                y: yScale(topic.y)
                               });
                             }}
                           />
