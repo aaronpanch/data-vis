@@ -1,5 +1,5 @@
 import { Zoom } from "@vx/zoom";
-import { scaleLinear, scaleQuantize } from "@vx/scale";
+import { scaleLinear, scaleLog, scaleQuantize } from "@vx/scale";
 import { Spring, animated } from "react-spring";
 
 const extent = (data, value = d => d) => [
@@ -10,7 +10,7 @@ const extent = (data, value = d => d) => [
 export default ({ width, height, data }) => {
   const colorScale = scaleQuantize({
     domain: extent(data, d => d.freq),
-    range: ["#ffe108", "#ffc10e", "#fd6d6f", "#855af2", "#11d2f9", "#49f4e7"]
+    range: ["#855af2", "#11d2f9", "#49f4e7"]
   });
 
   const xScale = scaleLinear({
@@ -25,7 +25,7 @@ export default ({ width, height, data }) => {
 
   const rScale = scaleLinear({
     domain: extent(data, d => d.freq),
-    range: [0, 100]
+    range: [10, 100]
   });
 
   return (
@@ -51,6 +51,7 @@ export default ({ width, height, data }) => {
                           r={rScale(topic.freq)}
                           cx={xScale(topic.x)}
                           cy={yScale(topic.y)}
+                          opacity="0.7"
                           fill={colorScale(topic.freq)}
                           onClick={event => {
                             const center = {
