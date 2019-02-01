@@ -7,7 +7,7 @@ const extent = (data, value = d => d) => [
   Math.max(...data.map(value))
 ];
 
-export default ({ width, height, data }) => {
+export default ({ width, height, data, margin = 30 }) => {
   const colorScale = scaleQuantize({
     domain: extent(data, d => d.freq),
     range: ["#855af2", "#11d2f9", "#49f4e7"]
@@ -15,12 +15,12 @@ export default ({ width, height, data }) => {
 
   const xScale = scaleLinear({
     domain: extent(data, d => d.x),
-    range: [0, width]
+    range: [margin, width - margin]
   });
 
   const yScale = scaleLinear({
     domain: extent(data, d => d.y),
-    range: [0, height]
+    range: [margin, height - margin]
   });
 
   const rScale = scaleLinear({

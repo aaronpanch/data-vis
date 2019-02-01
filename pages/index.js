@@ -8,12 +8,39 @@ export default class extends React.Component {
     return { data };
   }
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      width: 10, // anything
+      height: 10
+    };
+  }
+
+  setViewport() {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight - 5
+    });
+  }
+
+  componentDidMount() {
+    this.setViewport();
+    window.addEventListener("resize", this.setViewport.bind(this), false);
+  }
+
   render() {
     const { data } = this.props;
+    const { width, height } = this.state;
 
     return (
       <Layout>
-        <BubbleScatter width={1000} height={840} data={data.default} />
+        <style jsx global>{`
+          body {
+            margin: 0;
+          }
+        `}</style>
+        <BubbleScatter width={width} height={height} data={data.default} />
       </Layout>
     );
   }
