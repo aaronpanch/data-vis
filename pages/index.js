@@ -1,8 +1,8 @@
 import Layout from "../components/layout";
-import PackExample from "../components/pack-example";
+import BubbleScatter from "../components/bubble-scatter";
 
 export default () => (
   <Layout>
-    <PackExample width={1000} height={840} />
+    <BubbleScatter width={1000} height={840} />
   </Layout>
 );
