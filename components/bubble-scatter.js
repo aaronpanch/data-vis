@@ -25,8 +25,8 @@ export default ({ width, height, data, margin = 30 }) => {
   });
 
   const rScale = scaleLinear({
-    domain: extent(data, d => d.freq),
-    range: [10, 100]
+    domain: extent(data, d => Math.sqrt(d.freq)),
+    range: [5, 100]
   });
 
   const center = {
@@ -34,10 +34,14 @@ export default ({ width, height, data, margin = 30 }) => {
     y: height / 2
   };
 
-  const centerOn = (zoom, { x, y }) => {
-    zoom.setTranslate({
+  const centerOn = (zoom, { x, y, z = 1 }) => {
+    zoom.setTransformMatrix({
+      scaleX: z,
+      scaleY: z,
       translateX: center.x - x,
-      translateY: center.y - y
+      translateY: center.y - y,
+      skewX: 0,
+      skewY: 0
     });
   };
 
@@ -68,7 +72,7 @@ export default ({ width, height, data, margin = 30 }) => {
                         return (
                           <circle
                             key={`cir-${i}`}
-                            r={rScale(topic.freq)}
+                            r={rScale(Math.sqrt(topic.freq))}
                             cx={xScale(topic.x)}
                             cy={yScale(topic.y)}
                             opacity="0.7"
