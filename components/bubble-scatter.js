@@ -10,7 +10,9 @@ const extent = (data, value = d => d) => [
 
 export default class extends React.Component {
   render() {
-    const { width, height, data, margin = 30 } = this.props;
+    const { width, height, data, margin = 100 } = this.props;
+    const size = Math.min(width, height);
+
     const colorScale = scaleQuantize({
       domain: extent(data, d => d.freq),
       range: ["#855af2", "#11d2f9", "#49f4e7"]
@@ -18,12 +20,12 @@ export default class extends React.Component {
 
     const xScale = scaleLinear({
       domain: extent(data, d => d.x),
-      range: [margin, width - margin]
+      range: [(width - size) / 2 + margin, (width - size) / 2 + size - margin]
     });
 
     const yScale = scaleLinear({
       domain: extent(data, d => d.y),
-      range: [margin, height - margin]
+      range: [(height - size) / 2 + margin, (height - size) / 2 + size - margin]
     });
 
     const rScale = scaleLinear({
