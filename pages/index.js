@@ -4,7 +4,7 @@ import BubbleScatter from "../components/bubble-scatter";
 
 export default class extends React.Component {
   static async getInitialProps() {
-    const data = await import("../static/data.json");
+    const data = await import("./data.json");
     return { data };
   }
 
