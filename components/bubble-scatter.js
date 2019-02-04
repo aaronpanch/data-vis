@@ -1,6 +1,6 @@
 import React from "react";
 import { Zoom, composeMatrices, translateMatrix, scaleMatrix } from "@vx/zoom";
-import { scaleLinear, scaleLog, scaleQuantize } from "@vx/scale";
+import { scaleLinear, scaleQuantize } from "@vx/scale";
 import { Spring, animated } from "react-spring";
 
 const extent = (data, value = d => d) => [
