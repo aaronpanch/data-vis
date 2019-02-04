@@ -6,5 +6,6 @@
       "use": "@now/static-build",
       "config": { "distDir": "build" }
     }
-  ]
+  ],
+  "alias": ["bubbles"]
 }
