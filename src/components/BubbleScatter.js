@@ -8,7 +8,7 @@ const extent = (data, value = d => d) => [
   Math.max(...data.map(value))
 ];
 
-export default class extends React.Component {
+export default class extends React.PureComponent {
   render() {
     const { width, height, data } = this.props;
     const size = Math.min(width, height);
@@ -76,27 +76,41 @@ export default class extends React.Component {
                       <animated.g className="vx-group" transform={matrix}>
                         {data.map((topic, i) => {
                           return (
-                            <circle
-                              key={`cir-${i}`}
-                              r={rScale(Math.sqrt(topic.freq))}
-                              cx={xScale(topic.x)}
-                              cy={yScale(topic.y)}
-                              opacity="0.7"
-                              fill={colorScale(topic.freq)}
-                              onClick={event => {
-                                centerOn(zoom, {
-                                  x: xScale(topic.x),
-                                  y: yScale(topic.y),
-                                  z: Math.min(
-                                    5,
-                                    (width - 50) /
-                                      (2 * rScale(Math.sqrt(topic.freq))),
-                                    (height - 50) /
-                                      (2 * rScale(Math.sqrt(topic.freq)))
-                                  )
-                                });
+                            <Spring
+                              key={`spring-cir-${i}`}
+                              native
+                              from={{
+                                transform: `translate(${center.x -
+                                  xScale(topic.x)} ${center.y -
+                                  yScale(topic.y)})`
                               }}
-                            />
+                              to={{ transform: "translate(0 0)" }}
+                            >
+                              {({ transform }) => (
+                                <animated.circle
+                                  key={`cir-${i}`}
+                                  r={rScale(Math.sqrt(topic.freq))}
+                                  cx={xScale(topic.x)}
+                                  cy={yScale(topic.y)}
+                                  opacity="0.7"
+                                  transform={transform}
+                                  fill={colorScale(topic.freq)}
+                                  onClick={event => {
+                                    centerOn(zoom, {
+                                      x: xScale(topic.x),
+                                      y: yScale(topic.y),
+                                      z: Math.min(
+                                        5,
+                                        (width - 50) /
+                                          (2 * rScale(Math.sqrt(topic.freq))),
+                                        (height - 50) /
+                                          (2 * rScale(Math.sqrt(topic.freq)))
+                                      )
+                                    });
+                                  }}
+                                />
+                              )}
+                            </Spring>
                           );
                         })}
                       </animated.g>
